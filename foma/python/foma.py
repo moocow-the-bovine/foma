@@ -73,6 +73,8 @@ foma_fsm_union = foma.fsm_union
 foma_fsm_union.restype = POINTER(FSTstruct)
 foma_fsm_intersect = foma.fsm_intersect
 foma_fsm_intersect.restype = POINTER(FSTstruct)
+foma_fsm_invert = foma.fsm_invert
+foma_fsm_invert.restype = POINTER(FSTstruct)
 foma_fsm_minus = foma.fsm_minus
 foma_fsm_minus.restype = POINTER(FSTstruct)
 foma_fsm_compose = foma.fsm_compose
@@ -313,6 +315,11 @@ class FST(object):
     def __invert__(self):
         new = FST()
         new.fsthandle = self._fomacallunary(foma_fsm_complement)
+        return new
+
+    def invert(self):
+        new = FST()
+        new.fsthandle = self._fomacallunary(foma_fsm_invert)
         return new
 
     def __iter__(self):
